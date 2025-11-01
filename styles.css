@@ -35,6 +35,7 @@ h1 {
   height: 100%;
   gap: 8px;
 }
+
 .form-row {
   display: flex;
   align-items: center;
@@ -65,7 +66,7 @@ h1 {
 }
 
 .top-menu {
-  background-color: #eee;
+  background-color: #dcdcdc;
   text-align: center;
   padding: 5px;
 }
@@ -91,7 +92,7 @@ h1 {
 
 .sidebar {
   width: 180px;
-  background-color: #ccc;
+  background-color: #dcdcdc;
   padding: 15px;
 }
 
@@ -105,7 +106,23 @@ h1 {
 .content {
   flex-grow: 1;
   background-color: #dcdcdc;
+  position: relative;
   padding: 20px;
+}
+
+.top_table {
+  border: none;
+  border-collapse: collapse;
+}
+
+.top_table td {
+  border: none;
+  padding: 10px 0;
+}
+
+.top_table a {
+  font-weight: bold;
+  display: block;
 }
 
 table,
@@ -116,8 +133,51 @@ td {
   padding: 5px;
 }
 
+.right-image {
+  width: 200px;
+  height: auto;
+  float: inline-end;
+}
+
 .footer {
-  background-color: #ccc;
+  background-color: #dcdcdc;
   text-align: center;
   padding: 10px;
+}
+
+.back_button {
+  width: 180px;
+  padding: 15px;
+}
+
+.main_text {
+  flex-grow: 1;
+  background-color: #dcdcdc;
+  position: relative;
+  padding: 20px;
+}
+.characteristics {
+  flex-grow: 1;
+  background-color: #dcdcdc;
+  position: relative;
+  padding: 20px;
+}
+.info {
+  flex-grow: 1;
+  background-color: #dcdcdc;
+  position: relative;
+  padding: 20px;
+}
+.price {
+  flex-grow: 1;
+  background-color: #dcdcdc;
+  position: relative;
+  padding: 20px;
+}
+
+.sofa {
+  flex-grow: 1;
+  position: relative;
+  padding: 20px;
+  float: inline-end;
 }
