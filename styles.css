@@ -2,22 +2,29 @@ body {
   font-family: Arial, sans-serif;
   background-color: #fff;
 }
-
+/* Шапка */
 .header {
-  background-color: #ccc;
-  width: calc(100% - 40px);
-  max-width: 1240px;
-  height: 120px;
-  margin: 10px auto;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
-  box-sizing: border-box;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background-color: #ccc;
+  padding: 20px;
+  min-height: 100px;
+  height: auto;
+  margin: 20px;
 }
 
 .Logo {
-  width: 100px;
+  object-fit:cover ;
+  max-height: 200px;
+  max-width: 150px;
+  flex-wrap: wrap;
+}
+
+.Logo img{
+  max-width: 100%;
+  height: auto;
 }
 
 h1 {
@@ -27,12 +34,11 @@ h1 {
 }
 
 .login-form {
-  width: 180px;
+  width: 250px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   justify-content: center;
-  height: 100%;
   gap: 8px;
 }
 
@@ -42,6 +48,7 @@ h1 {
   justify-content: space-between;
   width: 100%;
   margin-bottom: 8px;
+  
 }
 
 .form-row label {
@@ -64,7 +71,9 @@ h1 {
   text-align: right;
   font-size: 14px;
 }
+/* Конец шапки */
 
+/* Разделы */
 .top-menu {
   background-color: #dcdcdc;
   text-align: center;
@@ -108,22 +117,25 @@ h1 {
   background-color: #dcdcdc;
   position: relative;
   padding: 20px;
+  margin: 0px;
 }
 
 .top_table {
-  border: none;
-  border-collapse: collapse;
-}
-
-.top_table td {
-  border: none;
-  padding: 10px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 190px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 15px;
 }
 
 .top_table a {
   font-weight: bold;
-  display: block;
+  text-decoration: none;
+  color: blue;
 }
+
 
 table,
 th,
@@ -143,31 +155,15 @@ td {
   background-color: #dcdcdc;
   text-align: center;
   padding: 10px;
+  margin: 20px;
 }
 
 .back_button {
   width: 180px;
   padding: 15px;
 }
+/* Другие страницы */
 
-.main_text {
-  flex-grow: 1;
-  background-color: #dcdcdc;
-  position: relative;
-  padding: 20px;
-}
-.characteristics {
-  flex-grow: 1;
-  background-color: #dcdcdc;
-  position: relative;
-  padding: 20px;
-}
-.info {
-  flex-grow: 1;
-  background-color: #dcdcdc;
-  position: relative;
-  padding: 20px;
-}
 .price {
   flex-grow: 1;
   background-color: #dcdcdc;
@@ -176,8 +172,36 @@ td {
 }
 
 .sofa {
-  flex-grow: 1;
+  max-width: 600px;
+  width: 100%;
+  height: auto;
   position: relative;
-  padding: 20px;
-  float: inline-end;
+  float: inline; /* убрать float, чтобы текст не обтекал */
+  display: block;
+  margin: 0 auto 16px; 
+}
+
+.price {
+  display: block;
+  width: 70%;
+  text-align: center;
+  clear: both; /* на случай, если где-то ещё остался float */
+  margin: 8px 0;
+}
+
+.buy-button {
+  display: block;
+  width: 200px;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.buy-button:hover {
+  background-color: #555;
 }
