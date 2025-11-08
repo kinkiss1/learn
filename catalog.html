@@ -1,67 +1,74 @@
 <!DOCTYPE html>
 <html lang="ru">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Каталог — AEKI</title>
+    <title>Каталог — Интерьер-центр</title>
     <link rel="stylesheet" href="styles.css" />
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="page-wrapper">
-        <header class="header">
-            <div class="Logo">
-                <img src="Lo22.png" alt="Logo" width="150" height="100" />
+      <header class="header">
+        <div class="Logo">
+          <img class="Logo" src="logo_IC_.png" alt="Logo" />
+        </div>
+
+        <h1>Интерьер-центр</h1>
+
+        <aside class="back_button">
+          <a href="index.html">Главная</a>
+        </aside>
+      </header>
+
+      <main class="main">
+        <aside class="sidebar">
+          <a href="catalog.html">Каталог</a>
+          <a href="about.html">О нас</a>
+          <a href="contacts.html">Контакты</a>
+        </aside>
+        <section class="content">
+          <h2>Каталог товаров</h2>
+
+          <div class="catalog-grid">
+            <div class="product-card">
+              <a href="sofa.html">
+                <img
+                  src="Main_sofa.png"
+                  alt="Диван дисКомфорт"
+                  class="product-image"
+                />
+                <h3>Диван «дисКомфорт»</h3>
+                <p class="product-price">39 900 ₽</p>
+                <p class="product-description">
+                  Современный диван с механизмом трансформации «еврокнижка».
+                  Идеально подходит для отдыха и сна.
+                </p>
+                <a href="sofa.html" class="buy-button">Подробнее</a>
+              </a>
             </div>
 
-            <h1>AEKI</h1>
+            <div class="product-card">
+              <a href="chair.html">
+                <img
+                  src="main_chair.png"
+                  alt="Кресло Элеганс"
+                  class="product-image"
+                />
+                <h3>Кресло «Элеганс»</h3>
+                <p class="product-price">24 900 ₽</p>
+                <p class="product-description">
+                  Эргономичное кресло с мягким наполнителем. Обеспечивает
+                  правильную поддержку спины.
+                </p>
+                <a href="chair.html" class="buy-button">Подробнее</a>
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
 
-            <aside class="back_button">
-                <a href="index.html">Главная</a>
-            </aside>
-        </header>
-
-        <main class="main">
-            <aside class="sidebar">
-                <a href="catalog.html">Каталог</a>
-                <a href="about.html">О нас</a>
-                <a href="contacts.html">Контакты</a>
-            </aside>
-            <section class="content">
-                <h2>Каталог товаров</h2>
-
-                <div class="catalog-grid">
-                    <div class="product-card">
-                        <a href="sofa.html">
-                            <img src="Main_sofa.png" alt="Диван дисКомфорт" class="product-image">
-                            <h3>Диван «дисКомфорт»</h3>
-                            <p class="product-price">39 900 ₽</p>
-                            <p class="product-description">
-                                Современный диван с механизмом трансформации «еврокнижка». Идеально подходит для отдыха
-                                и сна.
-                            </p>
-                            <a href="sofa.html" class="buy-button">Подробнее</a>
-                        </a>
-                    </div>
-
-                    <div class="product-card">
-                        <a href="chair.html">
-                            <img src="main_chair.png" alt="Кресло Элеганс" class="product-image">
-                            <h3>Кресло «Элеганс»</h3>
-                            <p class="product-price">24 900 ₽</p>
-                            <p class="product-description">
-                                Эргономичное кресло с мягким наполнителем. Обеспечивает правильную поддержку спины.
-                            </p>
-                            <a href="chair.html" class="buy-button">Подробнее</a>
-                        </a>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <footer class="footer">© 2025 Интерьер-центр. Все права защищены.</footer>
+      <footer class="footer">© 2025 Интерьер-центр. Все права защищены.</footer>
     </div>
-</body>
-
+  </body>
 </html>
