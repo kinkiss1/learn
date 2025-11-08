@@ -1,126 +1,134 @@
 <!DOCTYPE html>
 <html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Кресло — AEKI</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Кресло — AEKI</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
+  <body>
+    <div class="page-wrapper">
+      <header class="header">
+        <div class="Logo">
+          <img src="Lo22.png" alt="Logo" width="150" height="100" />
+        </div>
 
-<body>
-  <div class="page-wrapper">
-    <header class="header">
-      <div class="Logo">
-        <img src="Lo22.png" alt="Logo" width="150" height="100" />
-      </div>
+        <h1>AEKI</h1>
 
-      <h1>AEKI</h1>
+        <aside class="back_button">
+          <a href="index.html">Главная</a>
+        </aside>
+      </header>
 
-      <aside class="back_button">
-        <a href="index.html">Главная</a>
-      </aside>
-    </header>
+      <main class="main">
+        <aside class="sidebar">
+          <a href="catalog.html">Каталог</a>
+          <a href="about.html">О нас</a>
+          <a href="contacts.html">Контакты</a>
+        </aside>
+        <section class="content">
+          <div class="slider">
+            <div class="slides">
+              <input type="radio" name="slide" id="slide1" checked />
+              <input type="radio" name="slide" id="slide2" />
+              <input type="radio" name="slide" id="slide3" />
+              <input type="radio" name="slide" id="slide4" />
 
-    <main class="main">
-      <aside class="sidebar">
-        <a href="catalog.html">Каталог</a>
-        <a href="about.html">О нас</a>
-        <a href="contacts.html">Контакты</a>
-      </aside>
-      <section class="content">
+              <div class="slide s1">
+                <img src="main_chair.png" alt="Кресло спереди" />
+              </div>
 
-        <div class="slider">
-          <div class="slides">
-            <input type="radio" name="slide" id="slide1" checked>
-            <input type="radio" name="slide" id="slide2">
-            <input type="radio" name="slide" id="slide3">
-            <input type="radio" name="slide" id="slide4">
+              <div class="slide">
+                <img src="chair34.png" alt="Кресло 3/4 вида" />
+              </div>
 
-            <div class="slide s1">
-              <img src="main_chair.png" alt="Кресло спереди">
+              <div class="slide">
+                <img src="red_chair.png" alt="Кресло красное" />
+              </div>
+
+              <div class="slide">
+                <img src="green_chair.png" alt="Кресло зеленое" />
+              </div>
             </div>
 
-            <div class="slide">
-              <img src="chair34.png" alt="Кресло 3/4 вида">
-            </div>
-
-            <div class="slide">
-              <img src="red_chair.png" alt="Кресло красное">
-            </div>
-
-            <div class="slide">
-              <img src="green_chair.png" alt="Кресло зеленое">
+            <div class="arrows">
+              <label for="slide4" class="prev">&#10094;</label>
+              <label for="slide2" class="next">&#10095;</label>
             </div>
           </div>
 
-          <div class="arrows">
-            <label for="slide4" class="prev">&#10094;</label>
-            <label for="slide2" class="next">&#10095;</label>
+          <!-- Мини-превью -->
+          <div class="thumbnails">
+            <label for="slide1"
+              ><img src="main_chair.png" alt="Превью 1"
+            /></label>
+            <label for="slide2"><img src="chair34.png" alt="Превью 2" /></label>
+            <label for="slide3"
+              ><img src="red_chair.png" alt="Превью 3"
+            /></label>
+            <label for="slide4"
+              ><img src="green_chair.png" alt="Превью 4"
+            /></label>
           </div>
-        </div>
 
-        <!-- Мини-превью (thumbnail) -->
-        <div class="thumbnails">
-          <label for="slide1"><img src="main_chair.png" alt="Превью 1"></label>
-          <label for="slide2"><img src="chair34.png" alt="Превью 2"></label>
-          <label for="slide3"><img src="red_chair.png" alt="Превью 3"></label>
-          <label for="slide4"><img src="green_chair.png" alt="Превью 4"></label>
-        </div>
+          <p class="price">
+            Цена 24 900 ₽ 📦 В наличии — доставка по всей России за 2–4 дня.
+          </p>
+          <a href="#" class="buy-button"> Купить сейчас </a>
 
-        <p class="price">
-          Цена 24 900 ₽ 📦 В наличии — доставка по всей России за 2–4 дня.
-        </p>
-        <a href="#" class="buy-button"> Купить сейчас </a>
+          <p>
+            Описание товара: Кресло «Элеганс» — это идеальное сочетание уюта,
+            комфорта и современного дизайна. Благодаря эргономичной форме и
+            мягкому наполнителю кресло обеспечивает правильную посадку и
+            поддержку спины. Подойдёт как для гостиной, так и для рабочего
+            кабинета.
+          </p>
 
-        <p>
-          Описание товара: Кресло «Элеганс» — это идеальное сочетание уюта, комфорта и современного дизайна. Благодаря
-          эргономичной форме и мягкому наполнителю кресло обеспечивает правильную посадку и поддержку спины. Подойдёт
-          как для гостиной, так и для рабочего кабинета.
-        </p>
+          <p>
+            Характеристики: Размер: 95 × 90 × 100 см Обивка: микровелюр или
+            рогожка Наполнение: ППУ высокой плотности Каркас: массив бука Цвет:
+            светло-бежевый / серый Гарантия: 24 месяца
+          </p>
 
-        <p>
-          Характеристики:
-          Размер: 95 × 90 × 100 см
-          Обивка: микровелюр или рогожка
-          Наполнение: ППУ высокой плотности
-          Каркас: массив бука
-          Цвет: светло-бежевый / серый
-          Гарантия: 24 месяца
-        </p>
+          <p>
+            Преимущества: • Эргономичная форма спинки • Съёмные подушки •
+            Прочные деревянные ножки • Подходит для ежедневного использования •
+            Стильный и универсальный дизайн
+          </p>
+        </section>
+      </main>
 
-        <p>
-          Преимущества:
-          • Эргономичная форма спинки
-          • Съёмные подушки
-          • Прочные деревянные ножки
-          • Подходит для ежедневного использования
-          • Стильный и универсальный дизайн
-        </p>
-      </section>
-    </main>
+      <footer class="footer">© 2025 Интерьер-центр. Все права защищены.</footer>
+    </div>
 
-    <footer class="footer">© 2025 Интерьер-центр. Все права защищены.</footer>
-  </div>
-
-  <script>
-    // Цикл слайдов
-    (function () {
-      const radios = Array.from(document.querySelectorAll('input[name="slide"]'));
-      if (!radios.length) return;
-      function currentIndex() {
-        return radios.findIndex(r => r.checked);
-      }
-      function go(step) {
-        const idx = (currentIndex() + step + radios.length) % radios.length;
-        radios[idx].checked = true;
-      }
-      const prev = document.querySelector('.arrows .prev');
-      const next = document.querySelector('.arrows .next');
-      if (prev) prev.addEventListener('click', function (e) { e.preventDefault(); go(-1); });
-      if (next) next.addEventListener('click', function (e) { e.preventDefault(); go(1); });
-    })();
-  </script>
-</body>
-
+    <script>
+      // Цикл слайдов
+      (function () {
+        const radios = Array.from(
+          document.querySelectorAll('input[name="slide"]')
+        );
+        if (!radios.length) return;
+        function currentIndex() {
+          return radios.findIndex((r) => r.checked);
+        }
+        function go(step) {
+          const idx = (currentIndex() + step + radios.length) % radios.length;
+          radios[idx].checked = true;
+        }
+        const prev = document.querySelector(".arrows .prev");
+        const next = document.querySelector(".arrows .next");
+        if (prev)
+          prev.addEventListener("click", function (e) {
+            e.preventDefault();
+            go(-1);
+          });
+        if (next)
+          next.addEventListener("click", function (e) {
+            e.preventDefault();
+            go(1);
+          });
+      })();
+    </script>
+  </body>
 </html>
