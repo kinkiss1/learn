@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Кровать Ронда — Интерьер-центр</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <div class="page-wrapper">
+      <header class="header">
+        <div class="Logo">
+          <img class="Logo" src="img/logo_IC_.png" alt="Logo" />
+        </div>
+
+        <h1>Интерьер-центр</h1>
+
+        <aside class="back_button">
+          <a href="index.html">Главная</a>
+        </aside>
+      </header>
+
+      <main class="main">
+        <aside class="sidebar">
+          <a href="catalog.html">Каталог</a>
+          <a href="about.html">О нас</a>
+          <a href="contacts.html">Контакты</a>
+        </aside>
+        <section class="content">
+          <!-- Выбор цвета -->
+          <div class="color-selector">
+            <h3>Выберите цвет:</h3>
+            <div class="color-options">
+              <label class="color-option">
+                <input
+                  type="radio"
+                  name="color"
+                  value="white"
+                  checked
+                  onchange="changeColor('white')"
+                />
+                <span class="color-swatch" style="background-color: #f5f5dc">
+                  <span class="color-name">Белое дерево</span>
+                </span>
+              </label>
+
+              <label class="color-option">
+                <input
+                  type="radio"
+                  name="color"
+                  value="dark"
+                  onchange="changeColor('dark')"
+                />
+                <span class="color-swatch" style="background-color: #5a4a3a">
+                  <span class="color-name">Венге</span>
+                </span>
+              </label>
+
+              <label class="color-option">
+                <input
+                  type="radio"
+                  name="color"
+                  value="gray"
+                  onchange="changeColor('gray')"
+                />
+                <span class="color-swatch" style="background-color: white">
+                  <span class="color-name">Белый</span>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="slider">
+            <div class="slides">
+              <input type="radio" name="slide" id="slide1" checked />
+              <input type="radio" name="slide" id="slide2" />
+              <input type="radio" name="slide" id="slide3" />
+              <input type="radio" name="slide" id="slide4" />
+
+              <div class="slide s1">
+                <img
+                  id="img1"
+                  src="img/beds_and_sofa/white_bed1.png"
+                  alt="Кровать вид 1"
+                />
+              </div>
+
+              <div class="slide">
+                <img
+                  id="img2"
+                  src="img/beds_and_sofa/white_bed2.png"
+                  alt="Кровать вид 2"
+                />
+              </div>
+
+              <div class="slide">
+                <img
+                  id="img3"
+                  src="img/beds_and_sofa/white_bed3.png"
+                  alt="Кровать вид 3"
+                />
+              </div>
+
+              <div class="slide">
+                <img
+                  id="img4"
+                  src="img/beds_and_sofa/bed1.png"
+                  alt="Кровать вид 4"
+                />
+              </div>
+            </div>
+
+            <div class="arrows">
+              <label for="slide4" class="prev">&#10094;</label>
+              <label for="slide2" class="next">&#10095;</label>
+            </div>
+          </div>
+
+          <!-- Мини-превью -->
+          <div class="thumbnails">
+            <label for="slide1"
+              ><img
+                id="thumb1"
+                src="img/beds_and_sofa/white_bed1.png"
+                alt="Превью 1"
+            /></label>
+            <label for="slide2"
+              ><img
+                id="thumb2"
+                src="img/beds_and_sofa/white_bed2.png"
+                alt="Превью 2"
+            /></label>
+            <label for="slide3"
+              ><img
+                id="thumb3"
+                src="img/beds_and_sofa/white_bed3.png"
+                alt="Превью 3"
+            /></label>
+            <label for="slide4"
+              ><img id="thumb4" src="img/beds_and_sofa/bed1.png" alt="Превью 4"
+            /></label>
+          </div>
+
+          <p class="price">
+            Цена 32 900 ₽ 📦 В наличии — доставка по всей России за 3–5 дней.
+          </p>
+          <a href="#" class="buy-button"> Купить сейчас </a>
+          <div class="about_product">
+            <h3>Описание товара:</h3>
+            <p>
+              Кровать «Ронда КР-160» с основанием из ЛДСП — это современное и
+              стильное решение для вашей спальни. Выполненная в стиле
+              минимализм, кровать отличается лаконичным дизайном и надежной
+              конструкцией. Прочный каркас из ЛДСП обеспечивает долговечность и
+              устойчивость, а ортопедическое основание гарантирует комфортный и
+              здоровый сон.
+            </p>
+
+            <h3>Характеристики:</h3>
+            <ul>
+              <li>Размер спального места: 160 × 200 см</li>
+              <li>Ширина: 1635 мм</li>
+              <li>Высота: 700 мм</li>
+              <li>Глубина: 2032 мм</li>
+              <li>Материал корпуса: ЛДСП</li>
+              <li>Материал фасада: ЛДСП</li>
+              <li>Максимальная нагрузка: 160 кг (без учета матраса)</li>
+              <li>Рекомендуемый вес матраса: 10-20 кг</li>
+              <li>Цвет: белое дерево / венге / дуб сонома / серый</li>
+              <li>Гарантия: 24 месяца</li>
+            </ul>
+
+            <h3>Преимущества:</h3>
+            <p>
+              • Стильный минималистичный дизайн<br />
+              • Прочная конструкция из ЛДСП<br />
+              • Ортопедическое основание для здорового сна<br />
+              • Вместительное спальное место 160×200 см<br />
+              • Простота сборки и ухода<br />
+              • Доступная цена<br />
+              • Несколько вариантов цвета на выбор
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <p>© 2025 Интерьер-центр. Все права защищены.</p>
+      </footer>
+    </div>
+
+    <script>
+      // Объект с путями к изображениям для каждого цвета
+      const colorImages = {
+        white: [
+          "img/beds_and_sofa/white_bed1.png",
+          "img/beds_and_sofa/white_bed2.png",
+          "img/beds_and_sofa/white_bed3.png",
+          "img/beds_and_sofa/bed1.png",
+        ],
+        dark: [
+          "img/beds_and_sofa/black_bed1.png",
+          "img/beds_and_sofa/black_bed2.png",
+          "img/beds_and_sofa/black_bed3.png",
+          "img/beds_and_sofa/black_bed4.png",
+        ],
+        gray: [
+          "img/beds_and_sofa/bed2.png",
+          "img/beds_and_sofa/bed3.png",
+          "img/beds_and_sofa/bed4.png",
+          "img/beds_and_sofa/bed1.png",
+        ],
+      };
+
+      // Функция смены изображений при выборе цвета
+      function changeColor(color) {
+        const images = colorImages[color];
+
+        // Меняем основные изображения
+        document.getElementById("img1").src = images[0];
+        document.getElementById("img2").src = images[1];
+        document.getElementById("img3").src = images[2];
+        document.getElementById("img4").src = images[3];
+
+        // Меняем превью
+        document.getElementById("thumb1").src = images[0];
+        document.getElementById("thumb2").src = images[1];
+        document.getElementById("thumb3").src = images[2];
+        document.getElementById("thumb4").src = images[3];
+
+        // Возвращаемся к первому слайду
+        document.getElementById("slide1").checked = true;
+      }
+    </script>
+  </body>
+</html>

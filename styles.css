@@ -360,6 +360,116 @@ input[type="radio"] {
 }
 
 /* ===== КАТАЛОГ ===== */
+.catalog-intro {
+  text-align: center;
+  font-size: 1.1em;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.category-intro {
+  text-align: center;
+  font-size: 1em;
+  color: #666;
+  margin-bottom: 30px;
+  font-style: italic;
+}
+
+/* Хлебные крошки */
+.breadcrumb {
+  margin-bottom: 20px;
+  padding: 10px 0;
+  font-size: 0.95em;
+  color: #666;
+}
+
+.breadcrumb a {
+  color: #45a049;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.breadcrumb a:hover {
+  color: #2d6e2f;
+  text-decoration: underline;
+}
+
+.breadcrumb span {
+  color: #333;
+  font-weight: bold;
+}
+
+/* Сетка карточек категорий */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.category-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.category-card a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.category-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  background-color: #f5f5f5;
+}
+
+.category-card h3 {
+  font-size: 1.5em;
+  margin: 20px 20px 10px;
+  color: #333;
+}
+
+.category-description {
+  font-size: 1em;
+  color: #666;
+  line-height: 1.5;
+  margin: 0 20px 15px;
+}
+
+.category-count {
+  display: block;
+  text-align: center;
+  padding: 12px;
+  background-color: #45a049;
+  color: white;
+  font-weight: bold;
+  font-size: 0.95em;
+}
+
+.category-section {
+  margin-bottom: 50px;
+}
+
+.category-title {
+  font-size: 1.8em;
+  color: #333;
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid #45a049;
+  display: inline-block;
+}
+
 .catalog-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -452,4 +562,90 @@ input[type="radio"] {
   .contacts-container {
     grid-template-columns: 1fr;
   }
+}
+
+.about_product {
+  color: black;
+  font-size: 18px;
+  font-weight: 400;
+  background-color: #eaeaea;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== СЕЛЕКТОР ЦВЕТА ===== */
+.color-selector {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.color-selector h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 1.2em;
+}
+
+.color-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.color-option {
+  cursor: pointer;
+  position: relative;
+}
+
+.color-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.color-swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 80px;
+  border-radius: 8px;
+  border: 3px solid transparent;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.color-option input[type="radio"]:checked + .color-swatch {
+  border-color: #45a049;
+  box-shadow: 0 4px 12px rgba(69, 160, 73, 0.4);
+  transform: scale(1.05);
+}
+
+.color-option:hover .color-swatch {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.color-name {
+  color: #333;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 5px;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.about_product ul {
+  list-style-position: inside;
+  line-height: 1.8;
+  padding-left: 20px;
+}
+
+.about_product ul li {
+  margin-bottom: 8px;
 }
