@@ -1,159 +1,151 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Комод Классик — Интерьер-центр</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
 
-  <body>
-    <div class="page-wrapper">
-      <header class="header">
-        <div class="Logo">
-          <img class="Logo" src="img/logo_IC_.png" alt="Logo" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Комод Классик — Интерьер-центр</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <header class="header">
+      <div class="Logo">
+        <img class="Logo" src="img/logo_IC_.png" alt="Logo" />
+      </div>
+
+      <h1>Интерьер-центр</h1>
+
+      <aside class="back_button">
+        <a href="catalog.html">Назад в каталог</a>
+      </aside>
+    </header>
+
+    <main class="main">
+      <nav class="sidebar">
+        <a href="catalog.html">Каталог</a>
+        <a href="about.html">О нас</a>
+        <a href="contacts.html">Контакты</a>
+      </nav>
+      <section class="content">
+        <div class="slider">
+          <div class="slides">
+            <input type="radio" name="slide" id="slide1" checked />
+            <input type="radio" name="slide" id="slide2" />
+            <input type="radio" name="slide" id="slide3" />
+            <input type="radio" name="slide" id="slide4" />
+
+            <div class="slide s1">
+              <img src="img/chairs_and_desc/w_desc1.png" alt="Комод Классик" />
+            </div>
+
+            <div class="slide">
+              <img src="img/chairs_and_desc/w_desc2.png" alt="Комод Классик вид 2" />
+            </div>
+
+            <div class="slide">
+              <img src="img/chairs_and_desc/desc1.png" alt="Комод Классик вид 3" />
+            </div>
+
+            <div class="slide">
+              <img src="img/chairs_and_desc/desc2.png" alt="Комод Классик вид 4" />
+            </div>
+          </div>
+
+          <div class="arrows">
+            <label for="slide4" class="prev">&#10094;</label>
+            <label for="slide2" class="next">&#10095;</label>
+          </div>
         </div>
 
-        <h1>Интерьер-центр</h1>
+        <div class="thumbnails">
+          <label for="slide1"><img src="img/chairs_and_desc/w_desc1.png" alt="Превью 1" /></label>
+          <label for="slide2"><img src="img/chairs_and_desc/w_desc2.png" alt="Превью 2" /></label>
+          <label for="slide3"><img src="img/chairs_and_desc/desc1.png" alt="Превью 3" /></label>
+          <label for="slide4"><img src="img/chairs_and_desc/desc2.png" alt="Превью 4" /></label>
+        </div>
 
-        <aside class="back_button">
-          <a href="catalog.html">Назад в каталог</a>
-        </aside>
-      </header>
-
-      <main class="main">
-        <aside class="sidebar">
-          <a href="catalog.html">Каталог</a>
-          <a href="about.html">О нас</a>
-          <a href="contacts.html">Контакты</a>
-        </aside>
-        <section class="content">
-          <div class="slider">
-            <div class="slides">
-              <input type="radio" name="slide" id="slide1" checked />
-              <input type="radio" name="slide" id="slide2" />
-              <input type="radio" name="slide" id="slide3" />
-              <input type="radio" name="slide" id="slide4" />
-
-              <div class="slide s1">
-                <img
-                  src="img/chairs_and_desc/w_desc1.png"
-                  alt="Комод Классик"
-                />
-              </div>
-
-              <div class="slide">
-                <img
-                  src="img/chairs_and_desc/w_desc2.png"
-                  alt="Комод Классик вид 2"
-                />
-              </div>
-
-              <div class="slide">
-                <img
-                  src="img/chairs_and_desc/desc1.png"
-                  alt="Комод Классик вид 3"
-                />
-              </div>
-
-              <div class="slide">
-                <img
-                  src="img/chairs_and_desc/desc2.png"
-                  alt="Комод Классик вид 4"
-                />
-              </div>
-            </div>
-
-            <div class="arrows">
-              <label for="slide4" class="prev">&#10094;</label>
-              <label for="slide2" class="next">&#10095;</label>
-            </div>
-          </div>
-
-          <div class="thumbnails">
-            <label for="slide1"
-              ><img src="img/chairs_and_desc/w_desc1.png" alt="Превью 1"
-            /></label>
-            <label for="slide2"
-              ><img src="img/chairs_and_desc/w_desc2.png" alt="Превью 2"
-            /></label>
-            <label for="slide3"
-              ><img src="img/chairs_and_desc/desc1.png" alt="Превью 3"
-            /></label>
-            <label for="slide4"
-              ><img src="img/chairs_and_desc/desc2.png" alt="Превью 4"
-            /></label>
-          </div>
-
-          <p class="price">
-            Цена 21 900 ₽ 📦 В наличии — доставка по всей России за 2–3 дня.
+        <p class="price">
+          Цена 21 900 ₽ 📦 В наличии — доставка по всей России за 2–3 дня.
+        </p>
+        <a href="#" class="buy-button"> Купить сейчас </a>
+        <div class="about_product">
+          <h3>Описание товара:</h3>
+          <p>
+            Комод «Классик» — это элегантный комод в светлых тонах с четырьмя
+            вместительными ящиками. Классический дизайн с элементами декора
+            делает его идеальным дополнением к любому интерьеру. Отлично
+            впишется как в спальню, так и в гостиную или детскую комнату.
           </p>
-          <a href="#" class="buy-button"> Купить сейчас </a>
-          <div class="about_product">
-            <h3>Описание товара:</h3>
-            <p>
-              Комод «Классик» — это элегантный комод в светлых тонах с четырьмя
-              вместительными ящиками. Классический дизайн с элементами декора
-              делает его идеальным дополнением к любому интерьеру. Отлично
-              впишется как в спальню, так и в гостиную или детскую комнату.
-            </p>
 
-            <h3>Характеристики:</h3>
-            <ul>
-              <li>Размер: 95 × 50 × 100 см (Ш×Г×В)</li>
-              <li>Материал корпуса: ЛДСП 18 мм</li>
-              <li>Количество ящиков: 4 шт</li>
-              <li>Направляющие: шариковые, полного выдвижения</li>
-              <li>Цвет: белый / светлый дуб / кремовый</li>
-              <li>Фурнитура: керамические ручки с декором</li>
-              <li>Столешница: влагостойкая ЛДСП с защитным покрытием</li>
-              <li>Максимальная нагрузка на ящик: 12 кг</li>
-              <li>Гарантия: 24 месяца</li>
-            </ul>
+          <h3>Характеристики:</h3>
+          <ul>
+            <li>Размер: 95 × 50 × 100 см (Ш×Г×В)</li>
+            <li>Материал корпуса: ЛДСП 18 мм</li>
+            <li>Количество ящиков: 4 шт</li>
+            <li>Направляющие: шариковые, полного выдвижения</li>
+            <li>Цвет: белый / светлый дуб / кремовый</li>
+            <li>Фурнитура: керамические ручки с декором</li>
+            <li>Столешница: влагостойкая ЛДСП с защитным покрытием</li>
+            <li>Максимальная нагрузка на ящик: 12 кг</li>
+            <li>Гарантия: 24 месяца</li>
+          </ul>
 
-            <h3>Преимущества:</h3>
-            <p>
-              • Элегантный классический дизайн<br />
-              • Шариковые направляющие полного выдвижения<br />
-              • Качественные керамические ручки<br />
-              • Светлые тона визуально расширяют пространство<br />
-              • Большой объем хранения<br />
-              • Прочная и долговечная конструкция<br />
-              • Легкая сборка с подробной инструкцией
-            </p>
-          </div>
-        </section>
-      </main>
+          <h3>Преимущества:</h3>
+          <p>
+            • Элегантный классический дизайн<br />
+            • Шариковые направляющие полного выдвижения<br />
+            • Качественные керамические ручки<br />
+            • Светлые тона визуально расширяют пространство<br />
+            • Большой объем хранения<br />
+            • Прочная и долговечная конструкция<br />
+            • Легкая сборка с подробной инструкцией
+          </p>
+        </div>
 
-      <footer class="footer">© 2025 Интерьер-центр. Все права защищены.</footer>
-    </div>
+        <!-- Форма отзыва -->
+        <div class="review-form-container">
+          <h3>Оставьте отзыв о товаре</h3>
+          <form class="review-form" action="#" method="post">
+            <div class="form-group">
+              <label for="review-name">Ваше имя <span class="required">*</span></label>
+              <input type="text" id="review-name" name="name" placeholder="Введите ваше имя" required />
+            </div>
 
-    <script>
-      (function () {
-        const radios = Array.from(
-          document.querySelectorAll('input[name="slide"]')
-        );
-        if (!radios.length) return;
-        function currentIndex() {
-          return radios.findIndex((r) => r.checked);
-        }
-        function go(step) {
-          const idx = (currentIndex() + step + radios.length) % radios.length;
-          radios[idx].checked = true;
-        }
-        const prev = document.querySelector(".arrows .prev");
-        const next = document.querySelector(".arrows .next");
-        if (prev)
-          prev.addEventListener("click", function (e) {
-            e.preventDefault();
-            go(-1);
-          });
-        if (next)
-          next.addEventListener("click", function (e) {
-            e.preventDefault();
-            go(1);
-          });
-      })();
-    </script>
-  </body>
+            <div class="form-group">
+              <label for="review-email">Email <span class="required">*</span></label>
+              <input type="email" id="review-email" name="email" placeholder="example@mail.ru" required />
+            </div>
+
+            <div class="form-group">
+              <label for="review-rating">Оценка товара <span class="required">*</span></label>
+              <select id="review-rating" name="rating" required>
+                <option value="">Выберите оценку</option>
+                <option value="5">⭐⭐⭐⭐⭐ Отлично</option>
+                <option value="4">⭐⭐⭐⭐ Хорошо</option>
+                <option value="3">⭐⭐⭐ Нормально</option>
+                <option value="2">⭐⭐ Плохо</option>
+                <option value="1">⭐ Очень плохо</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="review-text">Ваш отзыв <span class="required">*</span></label>
+              <textarea id="review-text" name="review" rows="5"
+                placeholder="Расскажите о вашем опыте использования товара" required></textarea>
+            </div>
+
+            <button type="submit" class="review-submit-btn">Отправить отзыв</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">© 2025 Интерьер-центр. Все права защищены.</footer>
+  </div>
+
+  <script src="slider.js"></script>
+</body>
+
 </html>
