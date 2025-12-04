@@ -1,0 +1,42 @@
+/* Стили страницы контактов */
+
+.contacts-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.contact-info {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.contact-info h3 {
+  color: #333;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+.contact-info p {
+  margin: 15px 0;
+  line-height: 1.6;
+}
+
+.map-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.map-container h3 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 900px) {
+  .contacts-container {
+    grid-template-columns: 1fr;
+  }
+}
