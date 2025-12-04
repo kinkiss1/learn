@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "Vue.volar",
+    "bradlc.vscode-tailwindcss",
+    "yoavbls.pretty-ts-errors",
+    "rvest.vs-code-prettier-eslint",
+    "esbenp.prettier-vscode",
+    "christian-kohler.path-intellisense"
+  ]
+}
