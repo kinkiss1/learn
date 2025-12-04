@@ -25,15 +25,6 @@ export const products: Record<string, Product> = {
     characteristics:
       "Размер в собранном виде: 230 × 95 × 95 см; Спальное место: 200 × 145 см; Механизм: еврокнижка; Обивка: велюр премиум-класса; Наполнение: пружинный блок + ППУ; Каркас: массив сосны и берёзы; Цвет: серый графит / бежевый лен; Гарантия: 24 месяца",
   },
-  sofa2: {
-    id: "sofa2",
-    title: "Диван «Престиж»",
-    price: "45 900 ₽",
-    images: ["/src/assets/img/beds_and_sofa/Big_sofa.png"],
-    description:
-      "Большой угловой диван для просторной гостиной. Вместительный и комфортный для всей семьи.",
-    category: "soft",
-  },
   chair: {
     id: "chair",
     title: "Кресло «Элеганс»",
@@ -41,6 +32,15 @@ export const products: Record<string, Product> = {
     images: ["/src/assets/img/chairs_and_desc/main_chair.png"],
     description:
       "Эргономичное кресло с мягким наполнителем. Обеспечивает правильную поддержку спины.",
+    category: "soft",
+  },
+  sofa2: {
+    id: "sofa2",
+    title: "Диван «Престиж»",
+    price: "45 900 ₽",
+    images: ["/src/assets/img/beds_and_sofa/Big_sofa.png"],
+    description:
+      "Большой угловой диван для просторной гостиной. Вместительный и комфортный для всей семьи.",
     category: "soft",
   },
   bed: {
