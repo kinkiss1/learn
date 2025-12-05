@@ -5,11 +5,13 @@ import CatalogView from "../views/CatalogView.vue";
 import ContactsView from "../views/ContactsView.vue";
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
+import ProfileView from "../views/ProfileView.vue";
 import PrivacyPolicyView from "../views/PrivacyPolicyView.vue";
 import CategorySoftView from "../views/CategorySoftView.vue";
 import CategoryBedroomView from "../views/CategoryBedroomView.vue";
 import CategoryStorageView from "../views/CategoryStorageView.vue";
 import ProductView from "../views/ProductView.vue";
+import SearchResultsView from "../views/SearchResultsView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -45,6 +47,11 @@ const router = createRouter({
       component: RegisterView,
     },
     {
+      path: "/profile",
+      name: "profile",
+      component: ProfileView,
+    },
+    {
       path: "/privacy-policy",
       name: "privacy-policy",
       component: PrivacyPolicyView,
@@ -68,6 +75,11 @@ const router = createRouter({
       path: "/product/:id",
       name: "product",
       component: ProductView,
+    },
+    {
+      path: "/search",
+      name: "search",
+      component: SearchResultsView,
     },
   ],
 });

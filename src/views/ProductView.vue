@@ -1,16 +1,39 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import AppSidebar from '../components/AppSidebar.vue'
 import { useProductStore } from '../stores/products'
+import { useReviewsStore } from '../stores/reviews'
+import { useAuthStore } from '../stores/auth'
 
 const route = useRoute()
-const store = useProductStore()
+const productStore = useProductStore()
+const reviewsStore = useReviewsStore()
+const authStore = useAuthStore()
+
 const id = computed(() => route.params.id as string)
-const product = computed(() => store.getById(id.value))
+const product = computed(() => productStore.getById(id.value))
+const reviews = computed(() => reviewsStore.getByProduct(id.value))
 const currentSlide = ref(0)
 
-const imagesCount = computed(() => product.value?.images.length || 1)
+// Форма отзыва
+const reviewName = ref('')
+const reviewEmail = ref('')
+const reviewRating = ref('')
+const reviewText = ref('')
+const reviewLoading = ref(false)
+const reviewError = ref('')
+const reviewSuccess = ref('')
+
+// Заполняем email из авторизации
+watch(() => authStore.user, (user) => {
+    if (user) {
+        reviewName.value = user.name || ''
+        reviewEmail.value = user.email || ''
+    }
+}, { immediate: true })
+
+//const imagesCount = computed(() => product.value?.images.length || 1)
 
 const slidesContainerStyle = computed(() => ({
     transform: `translateX(-${currentSlide.value * 100}%)`
@@ -19,6 +42,22 @@ const slidesContainerStyle = computed(() => ({
 watch(product, () => {
     currentSlide.value = 0
 }, { immediate: true })
+
+// Загрузка отзывов при изменении товара
+watch(id, async (newId) => {
+    if (newId) {
+        await reviewsStore.fetchByProduct(newId)
+    }
+}, { immediate: true })
+
+onMounted(async () => {
+    // Загружаем данные о товаре из API если нет в кеше
+    if (!product.value) {
+        await productStore.fetchById(id.value)
+    }
+    await reviewsStore.fetchByProduct(id.value)
+    await authStore.checkAuth()
+})
 
 function setSlide(index: number) {
     currentSlide.value = index
@@ -32,6 +71,49 @@ function prevSlide() {
 function nextSlide() {
     if (!product.value) return
     currentSlide.value = (currentSlide.value + 1) % product.value.images.length
+}
+
+function formatDate(dateString: string): string {
+    const date = new Date(dateString)
+    return date.toLocaleDateString('ru-RU', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    })
+}
+
+function renderStars(rating: number): string {
+    return '⭐'.repeat(rating) + '☆'.repeat(5 - rating)
+}
+
+async function handleReviewSubmit() {
+    reviewError.value = ''
+    reviewSuccess.value = ''
+
+    if (!reviewName.value || !reviewEmail.value || !reviewRating.value || !reviewText.value) {
+        reviewError.value = 'Заполните все поля'
+        return
+    }
+
+    reviewLoading.value = true
+
+    const result = await reviewsStore.addReview({
+        productId: id.value,
+        name: reviewName.value,
+        email: reviewEmail.value,
+        rating: parseInt(reviewRating.value),
+        text: reviewText.value
+    })
+
+    reviewLoading.value = false
+
+    if (result.success) {
+        reviewSuccess.value = 'Спасибо за ваш отзыв!'
+        reviewRating.value = ''
+        reviewText.value = ''
+    } else {
+        reviewError.value = result.error || 'Ошибка при отправке отзыва'
+    }
 }
 </script>
 
@@ -81,23 +163,47 @@ function nextSlide() {
                     </template>
                 </div>
 
+                <!-- Отзывы -->
+                <div class="reviews-section">
+                    <h3>Отзывы о товаре ({{ reviews.length }})</h3>
+                    
+                    <div v-if="reviews.length === 0" class="no-reviews">
+                        <p>Пока нет отзывов. Будьте первым!</p>
+                    </div>
+                    
+                    <div v-else class="reviews-list">
+                        <div v-for="review in reviews" :key="review.id" class="review-item">
+                            <div class="review-header">
+                                <span class="review-author">{{ review.user_name }}</span>
+                                <span class="review-rating">{{ renderStars(review.rating) }}</span>
+                                <span class="review-date">{{ formatDate(review.created_at) }}</span>
+                            </div>
+                            <p class="review-text">{{ review.review_text }}</p>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Форма отзыва -->
                 <div class="review-form-container">
                     <h3>Оставьте отзыв о товаре</h3>
-                    <form class="review-form" action="#" method="post">
+                    
+                    <div v-if="reviewError" class="review-error">{{ reviewError }}</div>
+                    <div v-if="reviewSuccess" class="review-success">{{ reviewSuccess }}</div>
+                    
+                    <form class="review-form" @submit.prevent="handleReviewSubmit">
                         <div class="form-group">
                             <label for="review-name">Ваше имя <span class="required">*</span></label>
-                            <input type="text" id="review-name" name="name" placeholder="Введите ваше имя" required />
+                            <input type="text" id="review-name" v-model="reviewName" placeholder="Введите ваше имя" required />
                         </div>
 
                         <div class="form-group">
                             <label for="review-email">Email <span class="required">*</span></label>
-                            <input type="email" id="review-email" name="email" placeholder="example@mail.ru" required />
+                            <input type="email" id="review-email" v-model="reviewEmail" placeholder="example@mail.ru" required />
                         </div>
 
                         <div class="form-group">
                             <label for="review-rating">Оценка товара <span class="required">*</span></label>
-                            <select id="review-rating" name="rating" required>
+                            <select id="review-rating" v-model="reviewRating" required>
                                 <option value="">Выберите оценку</option>
                                 <option value="5">⭐⭐⭐⭐⭐ Отлично</option>
                                 <option value="4">⭐⭐⭐⭐ Хорошо</option>
@@ -109,11 +215,13 @@ function nextSlide() {
 
                         <div class="form-group">
                             <label for="review-text">Ваш отзыв <span class="required">*</span></label>
-                            <textarea id="review-text" name="review" rows="5"
+                            <textarea id="review-text" v-model="reviewText" rows="5"
                                 placeholder="Расскажите о вашем опыте использования товара" required></textarea>
                         </div>
 
-                        <button type="submit" class="review-submit-btn">Отправить отзыв</button>
+                        <button type="submit" class="review-submit-btn" :disabled="reviewLoading">
+                            {{ reviewLoading ? 'Отправка...' : 'Отправить отзыв' }}
+                        </button>
                     </form>
                 </div>
             </div>
@@ -171,5 +279,86 @@ function nextSlide() {
 
 .thumbnails span {
     cursor: pointer;
+}
+
+/* Секция отзывов */
+.reviews-section {
+    margin-top: 40px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+}
+
+.reviews-section h3 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.no-reviews {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.review-item {
+    background: #fff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.review-author {
+    font-weight: bold;
+    color: #333;
+}
+
+.review-rating {
+    color: #f5a623;
+}
+
+.review-date {
+    color: #999;
+    font-size: 14px;
+}
+
+.review-text {
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Форма отзыва */
+.review-error {
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.review-success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.review-submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 </style>
