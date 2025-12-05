@@ -12,6 +12,7 @@ import CategoryBedroomView from "../views/CategoryBedroomView.vue";
 import CategoryStorageView from "../views/CategoryStorageView.vue";
 import ProductView from "../views/ProductView.vue";
 import SearchResultsView from "../views/SearchResultsView.vue";
+import CartView from "../views/CartView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -80,6 +81,11 @@ const router = createRouter({
       path: "/search",
       name: "search",
       component: SearchResultsView,
+    },
+    {
+      path: "/cart",
+      name: "cart",
+      component: CartView,
     },
   ],
 });

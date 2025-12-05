@@ -6,7 +6,7 @@ import AppSidebar from '../components/AppSidebar.vue'
   <main class="main">
     <AppSidebar />
     <section class="content">
-      <img src="/src/assets/img/pillow.png" alt="pillow" class="right-image" />
+      <img src="/img/pillow.png" alt="pillow" class="right-image" />
       <h2>Главная</h2>
       <p>
         Интерьер-центр — это современный магазин мебели, где стиль, качество

@@ -21,7 +21,7 @@ const storageCount = computed(() => store.getByCategory('storage').length)
       <div class="categories-grid">
         <div class="category-card">
           <router-link to="/category-soft">
-            <img src="/src/assets/img/beds_and_sofa/Main_sofa.png" alt="Мягкая мебель" class="category-image" />
+            <img src="/img/beds_and_sofa/Main_sofa.png" alt="Мягкая мебель" class="category-image" />
             <h3>Мягкая мебель</h3>
             <p class="category-description">
               Диваны, кресла и другая мягкая мебель для вашего комфорта
@@ -32,7 +32,7 @@ const storageCount = computed(() => store.getByCategory('storage').length)
 
         <div class="category-card">
           <router-link to="/category-bedroom">
-            <img src="/src/assets/img/beds_and_sofa/white_bed1.png" alt="Спальня" class="category-image" />
+            <img src="/img/beds_and_sofa/white_bed1.png" alt="Спальня" class="category-image" />
             <h3>Спальня</h3>
             <p class="category-description">
               Кровати различных размеров и стилей для здорового сна
@@ -43,7 +43,7 @@ const storageCount = computed(() => store.getByCategory('storage').length)
 
         <div class="category-card">
           <router-link to="/category-storage">
-            <img src="/src/assets/img/wardrobes/wardrobe.png" alt="Системы хранения" class="category-image" />
+            <img src="/img/wardrobes/wardrobe.png" alt="Системы хранения" class="category-image" />
             <h3>Системы хранения</h3>
             <p class="category-description">
               Шкафы, комоды и другая мебель для хранения вещей

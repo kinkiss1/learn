@@ -5,16 +5,23 @@ import AppSidebar from '../components/AppSidebar.vue'
 import { useProductStore } from '../stores/products'
 import { useReviewsStore } from '../stores/reviews'
 import { useAuthStore } from '../stores/auth'
+import { useCartStore } from '../stores/cart'
 
 const route = useRoute()
 const productStore = useProductStore()
 const reviewsStore = useReviewsStore()
 const authStore = useAuthStore()
+const cartStore = useCartStore()
 
 const id = computed(() => route.params.id as string)
 const product = computed(() => productStore.getById(id.value))
 const reviews = computed(() => reviewsStore.getByProduct(id.value))
 const currentSlide = ref(0)
+const addedToCart = ref(false)
+
+// Проверка есть ли товар в корзине
+const isInCart = computed(() => cartStore.isInCart(id.value))
+const quantityInCart = computed(() => cartStore.getItemQuantity(id.value))
 
 // Форма отзыва
 const reviewName = ref('')
@@ -86,6 +93,16 @@ function renderStars(rating: number): string {
     return '⭐'.repeat(rating) + '☆'.repeat(5 - rating)
 }
 
+function handleAddToCart() {
+    if (product.value) {
+        cartStore.addItem(product.value)
+        addedToCart.value = true
+        setTimeout(() => {
+            addedToCart.value = false
+        }, 2000)
+    }
+}
+
 async function handleReviewSubmit() {
     reviewError.value = ''
     reviewSuccess.value = ''
@@ -151,7 +168,21 @@ async function handleReviewSubmit() {
                 <p class="price">
                     Цена {{ product.price }} 📦 В наличии — доставка по всей России за 3–5 дней.
                 </p>
-                <a href="#" class="buy-button">Купить сейчас</a>
+                
+                <div class="product-actions">
+                    <button 
+                        class="add-to-cart-btn" 
+                        :class="{ 'added': addedToCart, 'in-cart': isInCart }"
+                        @click="handleAddToCart"
+                    >
+                        <span v-if="addedToCart">✓ Добавлено!</span>
+                        <span v-else-if="isInCart">🛒 В корзине ({{ quantityInCart }})</span>
+                        <span v-else>🛒 В корзину</span>
+                    </button>
+                    <router-link to="/cart" v-if="isInCart" class="go-to-cart-btn">
+                        Перейти в корзину
+                    </router-link>
+                </div>
 
                 <div class="about_product">
                     <h3>Описание товара:</h3>
@@ -360,5 +391,62 @@ async function handleReviewSubmit() {
 .review-submit-btn:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+}
+
+/* Кнопки корзины */
+.product-actions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.add-to-cart-btn {
+    padding: 15px 30px;
+    background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(69, 160, 73, 0.3);
+}
+
+.add-to-cart-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(69, 160, 73, 0.4);
+}
+
+.add-to-cart-btn.added {
+    background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+}
+
+.add-to-cart-btn.in-cart {
+    background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+    box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
+}
+
+.add-to-cart-btn.in-cart:hover {
+    box-shadow: 0 6px 20px rgba(25, 118, 210, 0.4);
+}
+
+.go-to-cart-btn {
+    padding: 15px 25px;
+    background: transparent;
+    color: #1976d2;
+    border: 2px solid #1976d2;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.go-to-cart-btn:hover {
+    background: #1976d2;
+    color: white;
 }
 </style>

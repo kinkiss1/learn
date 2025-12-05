@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div>
-      <img class="Logo" src="/src/assets/img/logo_IC_.png" alt="Logo" />
+      <img class="Logo" src="/img/logo_IC_.png" alt="Logo" />
     </div>
     <h1>Интерьер-центр</h1>
 
@@ -16,6 +16,12 @@
       />
       <button type="button" class="search-button" @click="handleSearch">🔍</button>
     </div>
+
+    <!-- Корзина -->
+    <router-link to="/cart" class="cart-link">
+      <span class="cart-icon">🛒</span>
+      <span v-if="cartItemsCount > 0" class="cart-badge">{{ cartItemsCount }}</span>
+    </router-link>
 
     <div class="auth-links">
       <template v-if="isAuthenticated">
@@ -43,14 +49,17 @@
 import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '../stores/auth';
+import { useCartStore } from '../stores/cart';
 
 const router = useRouter();
 const authStore = useAuthStore();
+const cartStore = useCartStore();
 
 const searchQuery = ref('');
 
 const isAuthenticated = computed(() => authStore.isAuthenticated);
 const user = computed(() => authStore.user);
+const cartItemsCount = computed(() => cartStore.totalItems);
 
 onMounted(async () => {
   await authStore.checkAuth();
@@ -70,6 +79,41 @@ async function handleLogout() {
 </script>
 
 <style scoped>
+.cart-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.cart-link:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.cart-icon {
+  font-size: 24px;
+}
+
+.cart-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #dc3545;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
 .auth-links {
   display: flex;
   gap: 10px;
