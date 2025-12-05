@@ -45,21 +45,29 @@ function isInCart(id: string): boolean {
 
       <div class="catalog-grid">
         <div v-for="item in items" :key="item.id" class="product-card">
-          <router-link :to="`/product/${item.id}`">
+          <!-- Контейнер с изображением -->
+          <router-link :to="`/product/${item.id}`" class="product-image-container">
             <img :src="item.images[0]" :alt="item.title" class="product-image" />
-            <h3>{{ item.title }}</h3>
-            <p class="product-price">{{ item.price }}</p>
-            <p class="product-description">{{ item.description }}</p>
           </router-link>
-          <button 
-            class="cart-btn" 
-            :class="{ 'added': isAdded(item.id), 'in-cart': isInCart(item.id) }"
-            @click="addToCart(item)"
-          >
-            <span v-if="isAdded(item.id)">✓ Добавлено</span>
-            <span v-else-if="isInCart(item.id)">🛒 В корзине</span>
-            <span v-else>В корзину</span>
-          </button>
+          <!-- Контейнер с информацией -->
+          <div class="product-info">
+            <router-link :to="`/product/${item.id}`" class="product-link">
+              <h3 class="product-title">{{ item.title }}</h3>
+              <p class="product-description-short">{{ item.description }}</p>
+            </router-link>
+            <div class="product-footer">
+              <span class="product-price">{{ item.price }}</span>
+              <button 
+                class="cart-btn" 
+                :class="{ 'added': isAdded(item.id), 'in-cart': isInCart(item.id) }"
+                @click="addToCart(item)"
+              >
+                <span v-if="isAdded(item.id)">✓ Добавлено</span>
+                <span v-else-if="isInCart(item.id)">🛒 В корзине</span>
+                <span v-else>Купить</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -68,10 +76,7 @@ function isInCart(id: string): boolean {
 
 <style scoped>
 .cart-btn {
-  display: block;
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
+  padding: 10px 20px;
   background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
   color: white;
   border: none;
@@ -80,6 +85,7 @@ function isInCart(id: string): boolean {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
 .cart-btn:hover {

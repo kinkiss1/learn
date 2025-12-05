@@ -144,54 +144,80 @@ async function handleReviewSubmit() {
                 <span>{{ product?.title }}</span>
             </nav>
 
-            <div v-if="product">
-                <!-- Слайдер -->
-                <div class="slider">
-                    <div class="slides-container" :style="slidesContainerStyle">
-                        <div v-for="(img, idx) in product.images" :key="idx" class="slide-item">
-                            <img :src="img" :alt="product.title" />
+            <div v-if="product" class="product-page">
+                <!-- Основной блок товара -->
+                <div class="product-main">
+                    <!-- Левая колонка - изображения -->
+                    <div class="product-gallery">
+                        <!-- Слайдер -->
+                        <div class="slider">
+                            <div class="slides-container" :style="slidesContainerStyle">
+                                <div v-for="(img, idx) in product.images" :key="idx" class="slide-item">
+                                    <img :src="img" :alt="product.title" />
+                                </div>
+                            </div>
+                            <div class="arrows">
+                                <span class="prev" @click="prevSlide">&#10094;</span>
+                                <span class="next" @click="nextSlide">&#10095;</span>
+                            </div>
+                        </div>
+
+                        <!-- Мини-превью -->
+                        <div class="thumbnails">
+                            <span 
+                                v-for="(img, idx) in product.images" 
+                                :key="idx" 
+                                @click="setSlide(idx)"
+                                :class="{ active: currentSlide === idx }"
+                            >
+                                <img :src="img" :alt="`Превью ${idx + 1}`" />
+                            </span>
                         </div>
                     </div>
-                    <div class="arrows">
-                        <span class="prev" @click="prevSlide">&#10094;</span>
-                        <span class="next" @click="nextSlide">&#10095;</span>
+
+                    <!-- Правая колонка - информация -->
+                    <div class="product-details">
+                        <h1 class="product-title">{{ product.title }}</h1>
+                        
+                        <div class="product-price-block">
+                            <span class="current-price">{{ product.price }}</span>
+                            <span class="availability">📦 В наличии</span>
+                        </div>
+
+                        <p class="delivery-info">🚚 Доставка по всей России за 3–5 дней</p>
+
+                        <div class="product-actions">
+                            <button 
+                                class="add-to-cart-btn" 
+                                :class="{ 'added': addedToCart, 'in-cart': isInCart }"
+                                @click="handleAddToCart"
+                            >
+                                <span v-if="addedToCart">✓ Добавлено!</span>
+                                <span v-else-if="isInCart">🛒 В корзине ({{ quantityInCart }})</span>
+                                <span v-else>🛒 Купить</span>
+                            </button>
+                            <router-link to="/cart" v-if="isInCart" class="go-to-cart-btn">
+                                Перейти в корзину
+                            </router-link>
+                        </div>
+
+                        <div class="short-description">
+                            <p>{{ product.description }}</p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Мини-превью -->
-                <div class="thumbnails">
-                    <span v-for="(img, idx) in product.images" :key="idx" @click="setSlide(idx)">
-                        <img :src="img" :alt="`Превью ${idx + 1}`" />
-                    </span>
-                </div>
+                <!-- Блок с подробным описанием -->
+                <div class="product-info-blocks">
+                    <div class="info-block about-block">
+                        <h3><span class="icon">📝</span> Описание товара</h3>
+                        <p>{{ product.description }}</p>
+                    </div>
 
-                <p class="price">
-                    Цена {{ product.price }} 📦 В наличии — доставка по всей России за 3–5 дней.
-                </p>
-                
-                <div class="product-actions">
-                    <button 
-                        class="add-to-cart-btn" 
-                        :class="{ 'added': addedToCart, 'in-cart': isInCart }"
-                        @click="handleAddToCart"
-                    >
-                        <span v-if="addedToCart">✓ Добавлено!</span>
-                        <span v-else-if="isInCart">🛒 В корзине ({{ quantityInCart }})</span>
-                        <span v-else>🛒 В корзину</span>
-                    </button>
-                    <router-link to="/cart" v-if="isInCart" class="go-to-cart-btn">
-                        Перейти в корзину
-                    </router-link>
-                </div>
-
-                <div class="about_product">
-                    <h3>Описание товара:</h3>
-                    <p>{{ product.description }}</p>
-
-                    <template v-if="product.characteristics">
-                        <h3>Характеристики</h3>
+                    <div v-if="product.characteristics" class="info-block characteristics-block">
+                        <h3><span class="icon">📋</span> Характеристики</h3>
                         <p>{{ product.characteristics }}</p>
-                    </template>
+                    </div>
                 </div>
 
                 <!-- Отзывы -->
@@ -265,6 +291,164 @@ async function handleReviewSubmit() {
 </template>
 
 <style scoped>
+/* Основной контейнер страницы товара */
+.product-page {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Основной блок товара - две колонки */
+.product-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Галерея изображений */
+.product-gallery {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-gallery .slider {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    border-radius: 15px;
+    min-height: 350px;
+    max-height: 450px;
+}
+
+.product-gallery .thumbnails {
+    margin-top: 15px;
+}
+
+.product-gallery .thumbnails span {
+    display: inline-block;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.product-gallery .thumbnails span.active,
+.product-gallery .thumbnails span:hover {
+    border-color: #4caf50;
+}
+
+.product-gallery .thumbnails span.active img {
+    opacity: 1;
+}
+
+/* Детали товара */
+.product-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 10px 0;
+}
+
+.product-title {
+    font-size: 2em;
+    color: #333;
+    margin: 0 0 20px 0;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.product-price-block {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.current-price {
+    font-size: 2.2em;
+    font-weight: 700;
+    color: #2e7d32;
+}
+
+.availability {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    color: #2e7d32;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.delivery-info {
+    color: #666;
+    font-size: 1em;
+    margin-bottom: 25px;
+    padding: 12px 15px;
+    background: #f5f5f5;
+    border-radius: 10px;
+    border-left: 4px solid #4caf50;
+}
+
+.short-description {
+    margin-top: 25px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 12px;
+    font-size: 0.95em;
+    color: #555;
+    line-height: 1.6;
+}
+
+.short-description p {
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Информационные блоки */
+.product-info-blocks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.info-block {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.info-block h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 1.2em;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #4caf50;
+}
+
+.info-block .icon {
+    font-size: 1.3em;
+}
+
+.info-block p {
+    margin: 0;
+    color: #555;
+    line-height: 1.7;
+    font-size: 1em;
+}
+
 /* Слайдер с динамическими стилями */
 .slides-container {
     display: flex;
@@ -314,21 +498,27 @@ async function handleReviewSubmit() {
 
 /* Секция отзывов */
 .reviews-section {
-    margin-top: 40px;
-    padding: 20px;
-    background: #f9f9f9;
-    border-radius: 10px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    margin-bottom: 30px;
 }
 
 .reviews-section h3 {
-    margin-bottom: 20px;
+    margin: 0 0 20px 0;
     color: #333;
+    font-size: 1.3em;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #4caf50;
 }
 
 .no-reviews {
     text-align: center;
-    padding: 20px;
+    padding: 30px;
     color: #666;
+    background: #f5f5f5;
+    border-radius: 10px;
 }
 
 .reviews-list {
@@ -339,53 +529,79 @@ async function handleReviewSubmit() {
 
 .review-item {
     background: #fff;
-    padding: 15px 20px;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid #eee;
+    transition: all 0.3s ease;
+}
+
+.review-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .review-header {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     flex-wrap: wrap;
 }
 
 .review-author {
-    font-weight: bold;
+    font-weight: 600;
     color: #333;
+    font-size: 1.05em;
 }
 
 .review-rating {
     color: #f5a623;
+    font-size: 1.1em;
 }
 
 .review-date {
     color: #999;
-    font-size: 14px;
+    font-size: 0.9em;
 }
 
 .review-text {
     color: #555;
-    line-height: 1.6;
+    line-height: 1.7;
+    margin: 0;
 }
 
 /* Форма отзыва */
+.review-form-container {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.review-form-container h3 {
+    margin: 0 0 20px 0;
+    color: #333;
+    font-size: 1.3em;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #4caf50;
+}
+
 .review-error {
     background-color: #ffebee;
     color: #c62828;
-    padding: 10px 15px;
-    border-radius: 5px;
-    margin-bottom: 15px;
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid #c62828;
 }
 
 .review-success {
     background-color: #e8f5e9;
     color: #2e7d32;
-    padding: 10px 15px;
-    border-radius: 5px;
-    margin-bottom: 15px;
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid #2e7d32;
 }
 
 .review-submit-btn:disabled {
@@ -398,17 +614,16 @@ async function handleReviewSubmit() {
     display: flex;
     gap: 15px;
     align-items: center;
-    margin: 20px 0;
     flex-wrap: wrap;
 }
 
 .add-to-cart-btn {
-    padding: 15px 30px;
+    padding: 18px 40px;
     background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
     color: white;
     border: none;
-    border-radius: 10px;
-    font-size: 16px;
+    border-radius: 12px;
+    font-size: 1.1em;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -416,8 +631,8 @@ async function handleReviewSubmit() {
 }
 
 .add-to-cart-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(69, 160, 73, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(69, 160, 73, 0.4);
 }
 
 .add-to-cart-btn.added {
@@ -430,16 +645,16 @@ async function handleReviewSubmit() {
 }
 
 .add-to-cart-btn.in-cart:hover {
-    box-shadow: 0 6px 20px rgba(25, 118, 210, 0.4);
+    box-shadow: 0 6px 25px rgba(25, 118, 210, 0.4);
 }
 
 .go-to-cart-btn {
-    padding: 15px 25px;
+    padding: 18px 30px;
     background: transparent;
     color: #1976d2;
     border: 2px solid #1976d2;
-    border-radius: 10px;
-    font-size: 14px;
+    border-radius: 12px;
+    font-size: 1em;
     font-weight: 500;
     text-decoration: none;
     transition: all 0.3s ease;
@@ -448,5 +663,26 @@ async function handleReviewSubmit() {
 .go-to-cart-btn:hover {
     background: #1976d2;
     color: white;
+}
+
+/* Адаптивность */
+@media (max-width: 900px) {
+    .product-main {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        padding: 20px;
+    }
+
+    .product-title {
+        font-size: 1.6em;
+    }
+
+    .current-price {
+        font-size: 1.8em;
+    }
+
+    .product-info-blocks {
+        grid-template-columns: 1fr;
+    }
 }
 </style>

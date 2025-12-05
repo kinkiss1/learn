@@ -21,20 +21,29 @@
       <div v-else class="catalog">
         <div class="product-grid">
           <div v-for="product in searchResults" :key="product.id" class="product-card">
-            <router-link :to="`/product/${product.id}`">
-              <img :src="product.images[0]" :alt="product.title" />
-              <h3>{{ product.title }}</h3>
-              <p class="price">{{ product.price }}</p>
+            <!-- Контейнер с изображением -->
+            <router-link :to="`/product/${product.id}`" class="product-image-container">
+              <img :src="product.images[0]" :alt="product.title" class="product-image" />
             </router-link>
-            <button 
-              class="buy-button"
-              :class="{ 'added': isAdded(product.id), 'in-cart': isInCart(product.id) }"
-              @click="addToCart(product)"
-            >
-              <span v-if="isAdded(product.id)">✓ Добавлено</span>
-              <span v-else-if="isInCart(product.id)">🛒 В корзине</span>
-              <span v-else>В корзину</span>
-            </button>
+            <!-- Контейнер с информацией -->
+            <div class="product-info">
+              <router-link :to="`/product/${product.id}`" class="product-link">
+                <h3 class="product-title">{{ product.title }}</h3>
+                <p class="product-description-short">{{ product.description }}</p>
+              </router-link>
+              <div class="product-footer">
+                <span class="product-price">{{ product.price }}</span>
+                <button 
+                  class="buy-button"
+                  :class="{ 'added': isAdded(product.id), 'in-cart': isInCart(product.id) }"
+                  @click="addToCart(product)"
+                >
+                  <span v-if="isAdded(product.id)">✓ Добавлено</span>
+                  <span v-else-if="isInCart(product.id)">🛒 В корзине</span>
+                  <span v-else>Купить</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -133,51 +142,109 @@ watch(searchQuery, () => {
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
 }
 
 .product-card {
-  background: #fff;
-  border-radius: 8px;
-  padding: 15px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
 }
 
 .product-card:hover {
+  box-shadow: 0 8px 25px rgba(69, 160, 73, 0.15);
   transform: translateY(-5px);
+  border-color: rgba(69, 160, 73, 0.2);
 }
 
-.product-card img {
+/* Контейнер с изображением */
+.product-image-container {
+  display: block;
+  background-color: #f5f5f5;
+  padding: 15px;
+  text-decoration: none;
+}
+
+.product-image {
   width: 100%;
   height: 200px;
   object-fit: contain;
-  margin-bottom: 10px;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
 }
 
-.product-card h3 {
-  font-size: 16px;
-  margin-bottom: 8px;
+.product-card:hover .product-image {
+  transform: scale(1.05);
+}
+
+/* Контейнер с информацией */
+.product-info {
+  padding: 15px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  flex-grow: 1;
+}
+
+.product-title {
+  font-size: 1.1em;
+  margin: 0 0 10px 0;
   color: #333;
+  font-weight: 600;
+  line-height: 1.3;
 }
 
-.product-card .price {
+.product-description-short {
+  font-size: 0.9em;
+  color: #666;
+  line-height: 1.5;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 5.4em;
+}
+
+.product-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.product-price {
+  font-size: 1.3em;
   font-weight: bold;
-  color: #6b8e23;
-  margin-bottom: 15px;
+  color: #2e7d32;
+  margin: 0;
 }
 
 .buy-button {
-  width: 100%;
-  padding: 10px;
+  padding: 10px 20px;
   background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .buy-button:hover {
@@ -191,9 +258,5 @@ watch(searchQuery, () => {
 
 .buy-button.in-cart {
   background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
-}
-
-.buy-button:hover {
-  background-color: #696969;
 }
 </style>
