@@ -31,6 +31,7 @@ export interface User {
   name: string;
   email: string;
   phone?: string;
+  avatar?: string;
   subscribe_news?: number;
   created_at?: string;
 }
@@ -118,6 +119,33 @@ export const authApi = {
   // Проверка сессии
   async check(): Promise<CheckAuthResponse> {
     return apiRequest('/auth/check');
+  },
+
+  // Загрузка аватара
+  async uploadAvatar(file: File): Promise<{ success: boolean; avatar: string }> {
+    const formData = new FormData();
+    formData.append('avatar', file);
+    
+    const response = await fetch(`${API_BASE}/auth/avatar`, {
+      method: 'POST',
+      credentials: 'include',
+      body: formData,
+    });
+    
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.error || 'Ошибка загрузки аватара');
+    }
+    
+    return data;
+  },
+
+  // Удаление аватара
+  async deleteAvatar(): Promise<{ success: boolean }> {
+    return apiRequest('/auth/avatar', {
+      method: 'DELETE',
+    });
   },
 };
 

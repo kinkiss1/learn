@@ -91,6 +91,42 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  // Загрузить аватар
+  async function uploadAvatar(file: File) {
+    try {
+      loading.value = true;
+      error.value = null;
+      const response = await authApi.uploadAvatar(file);
+      if (user.value) {
+        user.value.avatar = response.avatar;
+      }
+      return { success: true, avatar: response.avatar };
+    } catch (e: any) {
+      error.value = e.message;
+      return { success: false, error: e.message };
+    } finally {
+      loading.value = false;
+    }
+  }
+
+  // Удалить аватар
+  async function deleteAvatar() {
+    try {
+      loading.value = true;
+      error.value = null;
+      await authApi.deleteAvatar();
+      if (user.value) {
+        user.value.avatar = undefined;
+      }
+      return { success: true };
+    } catch (e: any) {
+      error.value = e.message;
+      return { success: false, error: e.message };
+    } finally {
+      loading.value = false;
+    }
+  }
+
   return {
     user,
     loading,
@@ -101,6 +137,8 @@ export const useAuthStore = defineStore('auth', () => {
     login,
     logout,
     fetchUser,
+    uploadAvatar,
+    deleteAvatar,
   };
 });
 

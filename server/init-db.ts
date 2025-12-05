@@ -44,6 +44,7 @@ db.exec(`
     phone TEXT,
     email TEXT UNIQUE NOT NULL,
     password_hash TEXT NOT NULL,
+    avatar TEXT,
     subscribe_news INTEGER DEFAULT 0,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
   );

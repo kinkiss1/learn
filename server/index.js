@@ -6,6 +6,8 @@ import bcrypt from 'bcryptjs';
 import { v4 as uuidv4 } from 'uuid';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import fs from 'fs';
+import multer from 'multer';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -16,6 +18,36 @@ const PORT = 3001;
 // База данных
 const db = new Database(join(__dirname, 'furniture.db'));
 
+// Папка для аватаров
+const uploadsDir = join(__dirname, 'uploads', 'avatars');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
+// Настройка multer для загрузки файлов
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, uploadsDir);
+  },
+  filename: (req, file, cb) => {
+    const ext = file.originalname.split('.').pop();
+    cb(null, `${req.user.id}-${Date.now()}.${ext}`);
+  }
+});
+
+const upload = multer({
+  storage,
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Разрешены только изображения (JPEG, PNG, GIF, WebP)'));
+    }
+  }
+});
+
 // Middleware
 app.use(cors({
   origin: 'http://localhost:5173',
@@ -23,6 +55,9 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(cookieParser());
+
+// Статические файлы для аватаров
+app.use('/uploads', express.static(join(__dirname, 'uploads')));
 
 // ====== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ======
 
@@ -215,11 +250,59 @@ app.post('/api/auth/logout', (req, res) => {
 // Получить текущего пользователя
 app.get('/api/auth/me', requireAuth, (req, res) => {
   const user = db.prepare(`
-    SELECT id, name, email, phone, subscribe_news, created_at
+    SELECT id, name, email, phone, avatar, subscribe_news, created_at
     FROM users WHERE id = ?
   `).get(req.user.id);
   
   res.json({ user });
+});
+
+// Загрузка аватара
+app.post('/api/auth/avatar', requireAuth, upload.single('avatar'), (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: 'Файл не загружен' });
+    }
+    
+    // Удаляем старый аватар, если есть
+    const oldUser = db.prepare('SELECT avatar FROM users WHERE id = ?').get(req.user.id);
+    if (oldUser?.avatar) {
+      const oldPath = join(__dirname, oldUser.avatar);
+      if (fs.existsSync(oldPath)) {
+        fs.unlinkSync(oldPath);
+      }
+    }
+    
+    const avatarPath = `/uploads/avatars/${req.file.filename}`;
+    
+    db.prepare('UPDATE users SET avatar = ? WHERE id = ?').run(avatarPath, req.user.id);
+    
+    res.json({ success: true, avatar: avatarPath });
+  } catch (error) {
+    console.error('Avatar upload error:', error);
+    res.status(500).json({ error: 'Ошибка загрузки аватара' });
+  }
+});
+
+// Удаление аватара
+app.delete('/api/auth/avatar', requireAuth, (req, res) => {
+  try {
+    const user = db.prepare('SELECT avatar FROM users WHERE id = ?').get(req.user.id);
+    
+    if (user?.avatar) {
+      const avatarPath = join(__dirname, user.avatar);
+      if (fs.existsSync(avatarPath)) {
+        fs.unlinkSync(avatarPath);
+      }
+      
+      db.prepare('UPDATE users SET avatar = NULL WHERE id = ?').run(req.user.id);
+    }
+    
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Avatar delete error:', error);
+    res.status(500).json({ error: 'Ошибка удаления аватара' });
+  }
 });
 
 // Проверка сессии
