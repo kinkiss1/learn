@@ -74,6 +74,9 @@ function validatePassword(password) {
   if (!/[0-9]/.test(password)) {
     errors.push('Пароль должен содержать хотя бы одну цифру');
   }
+  if (!/[^\w\d]/.test(password)){
+    errors.push('Пароль должен содержать хотя бы 1 спец.символ');
+  }
   
   return errors;
 }
