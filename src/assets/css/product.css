@@ -1,0 +1,204 @@
+/* Стили карточек товаров */
+
+.product-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  box-shadow: 0 8px 25px rgba(69, 160, 73, 0.15);
+  transform: translateY(-5px);
+  border-color: rgba(69, 160, 73, 0.2);
+}
+
+/* Контейнер с изображением */
+.product-image-container {
+  display: block;
+  background-color: #f5f5f5;
+  padding: 15px;
+  text-decoration: none;
+}
+
+.product-image {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.05);
+}
+
+/* Контейнер с информацией */
+.product-info {
+  padding: 15px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  flex-grow: 1;
+}
+
+.product-title {
+  font-size: 1.1em;
+  margin: 0 0 10px 0;
+  color: #333;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.product-description-short {
+  font-size: 0.9em;
+  color: #666;
+  line-height: 1.5;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 5.4em;
+}
+
+.product-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.product-price {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #2e7d32;
+  margin: 0;
+}
+
+/* Старые стили для совместимости */
+.product-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.product-card h3 {
+  font-size: 1.3em;
+  margin: 10px 0;
+  color: #333;
+}
+
+.product-description {
+  font-size: 0.95em;
+  color: #666;
+  line-height: 1.4;
+}
+
+.price {
+  display: block;
+  width: 70%;
+  text-align: center;
+  clear: both;
+  margin: 8px auto;
+  background-color: #dcdcdc;
+  position: relative;
+  padding: 20px;
+}
+
+.about_product {
+  color: black;
+  font-size: 18px;
+  font-weight: 400;
+  background-color: #eaeaea;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.about_product ul {
+  list-style-position: inside;
+  line-height: 1.8;
+  padding-left: 20px;
+}
+
+.about_product ul li {
+  margin-bottom: 8px;
+}
+
+.color-selector {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.color-selector h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 1.2em;
+}
+
+.color-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.color-option {
+  cursor: pointer;
+  position: relative;
+}
+
+.color-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.color-swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 80px;
+  border-radius: 8px;
+  border: 3px solid transparent;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.color-option input[type="radio"]:checked + .color-swatch {
+  border-color: #45a049;
+  box-shadow: 0 4px 12px rgba(69, 160, 73, 0.4);
+  transform: scale(1.05);
+}
+
+.color-option:hover .color-swatch {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.color-name {
+  color: #333;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 5px;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
