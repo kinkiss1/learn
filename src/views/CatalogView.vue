@@ -7,6 +7,7 @@ const store = useProductStore()
 const softCount = computed(() => store.getByCategory('soft').length)
 const bedroomCount = computed(() => store.getByCategory('bedroom').length)
 const storageCount = computed(() => store.getByCategory('storage').length)
+
 </script>
 
 <template>
